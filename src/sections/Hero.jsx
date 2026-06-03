@@ -13,6 +13,7 @@ import CanvasLoader from '../components/Loading.jsx';
 import HeroCamera from '../components/HeroCamera.jsx';
 import { calculateSizes } from '../constants/index.js';
 import { HackerRoom } from '../components/HackerRoom.jsx';
+import ErrorBoundary from '../components/ErrorBoundary.jsx';
 
 const Hero = () => {
   // Use media queries to determine screen size
@@ -26,27 +27,36 @@ const Hero = () => {
     <section className="min-h-screen w-full flex flex-col relative" id="home">
       <div className="w-full mx-auto flex flex-col sm:mt-36 mt-20 c-space gap-3">
         <p className="sm:text-3xl text-xl font-medium text-white text-center font-generalsans">
-          Hi, I am Adrian <span className="waving-hand">👋</span>
+          Hi, I am Rajdeep Bandyopadhaya <span className="waving-hand">👋</span>
         </p>
-        <p className="hero_tag text-gray_gradient">Building Products & Brands</p>
+        <p className="hero_tag text-gray_gradient">Engineering Ideas into Reality</p>
       </div>
 
       <div className="w-full h-full absolute inset-0">
         <Canvas className="w-full h-full">
           <Suspense fallback={<CanvasLoader />}>
-            {/* To hide controller */}
             <Leva hidden />
             <PerspectiveCamera makeDefault position={[0, 0, 30]} />
 
             <HeroCamera isMobile={isMobile}>
-              <HackerRoom scale={sizes.deskScale} position={sizes.deskPosition} rotation={[0.1, -Math.PI, 0]} />
+              <ErrorBoundary fallback={null}>
+                <HackerRoom scale={sizes.deskScale} position={sizes.deskPosition} rotation={[0.1, -Math.PI, 0]} />
+              </ErrorBoundary>
             </HeroCamera>
 
             <group>
-              <Target position={sizes.targetPosition} />
-              <ReactLogo position={sizes.reactLogoPosition} />
-              <Rings position={sizes.ringPosition} />
-              <Cube position={sizes.cubePosition} />
+              <ErrorBoundary fallback={null}>
+                <Target position={sizes.targetPosition} />
+              </ErrorBoundary>
+              <ErrorBoundary fallback={null}>
+                <ReactLogo position={sizes.reactLogoPosition} />
+              </ErrorBoundary>
+              <ErrorBoundary fallback={null}>
+                <Rings position={sizes.ringPosition} />
+              </ErrorBoundary>
+              <ErrorBoundary fallback={null}>
+                <Cube position={sizes.cubePosition} />
+              </ErrorBoundary>
             </group>
 
             <ambientLight intensity={1} />

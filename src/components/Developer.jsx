@@ -26,6 +26,19 @@ const Developer = ({ animationName = 'idle', ...props }) => {
   clappingAnimation[0].name = 'clapping';
   victoryAnimation[0].name = 'victory';
 
+  // Strip the 'Armature > ' prefix that FBX exports add,
+  // so tracks correctly target the GLB skeleton (rooted at 'Hips')
+  const fixTracks = (clip) => {
+    clip.tracks.forEach((track) => {
+      track.name = track.name.replace(/^Armature > /, '');
+    });
+    return clip;
+  };
+  fixTracks(idleAnimation[0]);
+  fixTracks(saluteAnimation[0]);
+  fixTracks(clappingAnimation[0]);
+  fixTracks(victoryAnimation[0]);
+
   const { actions } = useAnimations(
     [idleAnimation[0], saluteAnimation[0], clappingAnimation[0], victoryAnimation[0]],
     group,
@@ -106,5 +119,9 @@ const Developer = ({ animationName = 'idle', ...props }) => {
 };
 
 useGLTF.preload('/models/animations/developer.glb');
+useFBX.preload('/models/animations/idle.fbx');
+useFBX.preload('/models/animations/salute.fbx');
+useFBX.preload('/models/animations/clapping.fbx');
+useFBX.preload('/models/animations/victory.fbx');
 
 export default Developer;

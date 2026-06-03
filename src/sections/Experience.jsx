@@ -50,7 +50,17 @@ const WorkExperience = () => {
                     <p className="text-sm mb-5">
                       {item.pos} -- <span>{item.duration}</span>
                     </p>
-                    <p className="group-hover:text-white transition-all ease-in-out duration-500">{item.title}</p>
+                    <div className="group-hover:text-white transition-all ease-in-out duration-500">
+                      {Array.isArray(item.title) ? (
+                        <ul className="list-disc ml-5 space-y-2">
+                          {item.title.map((bullet, i) => (
+                            <li key={i}>{bullet}</li>
+                          ))}
+                        </ul>
+                      ) : (
+                        item.title
+                      )}
+                    </div>
                   </div>
                 </div>
               ))}

@@ -10,7 +10,7 @@ export function HackerRoom(props) {
   const { nodes, materials } = useGLTF('/models/hacker-room.glb');
 
   const monitortxt = useTexture('textures/desk/monitor.png');
-  const screenTxt = useTexture('textures/desk/screen.png');
+  const screenTxt = useTexture('textures/desk/Screen1.png');
 
   return (
     <group {...props} dispose={null}>
@@ -39,3 +39,5 @@ export function HackerRoom(props) {
 }
 
 useGLTF.preload('/models/hacker-room.glb');
+useTexture.preload('textures/desk/monitor.png');
+useTexture.preload('textures/desk/Screen1.png');
