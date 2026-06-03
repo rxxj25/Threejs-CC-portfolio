@@ -1,6 +1,6 @@
 <div align="center">
   <br />
-    <img src="https://github.com/user-attachments/assets/2afc2dc3-f840-4d98-9378-f34acd7df173" alt="Rajdeep Portfolio Banner">
+    <img src="./public/assets/github-portfolio-banner.png" alt="Rajdeep Portfolio Banner">
   <br />
 
   <div>
